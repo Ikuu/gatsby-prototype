@@ -21,7 +21,7 @@ const IndexPage = ({ data: { allDatoCmsArticle } }) => {
 
       <h2>Articles</h2>
       {articles.map(({ node }) => (
-        <div key={node.id}>
+        <div key={node.slug}>
           <h3>
             <Link to={`article/${node.slug}`}>{node.title}</Link>
           </h3>
@@ -36,10 +36,9 @@ export default IndexPage
 
 export const query = graphql`
   query IndexQuery {
-    allDatoCmsArticle {
+    allDatoCmsArticle(sort: { fields: [meta___createdAt], order: [DESC] }) {
       edges {
         node {
-          id
           slug
           title
           copy
