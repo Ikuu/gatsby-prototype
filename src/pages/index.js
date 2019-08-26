@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 
 import Layout from "../components/layout"
 import Image from "../components/image"
@@ -22,7 +22,9 @@ const IndexPage = ({ data: { allDatoCmsArticle } }) => {
       <h2>Articles</h2>
       {articles.map(({ node }) => (
         <div key={node.id}>
-          <h3>{node.title}</h3>
+          <h3>
+            <Link to={`article/${node.slug}`}>{node.title}</Link>
+          </h3>
           <p>{node.copy}</p>
         </div>
       ))}
@@ -38,6 +40,7 @@ export const query = graphql`
       edges {
         node {
           id
+          slug
           title
           copy
         }
