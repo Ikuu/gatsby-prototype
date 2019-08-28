@@ -13,6 +13,7 @@ const ArticlePage = ({ data: { article } }) => {
       <h1>{title}</h1>
       <p>{copy}</p>
 
+      {relatedArticles.length > 0 && <h2>Related Articles</h2>}
       <ul>
         {relatedArticles.map(article => (
           <li>
