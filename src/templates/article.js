@@ -1,10 +1,10 @@
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 const ArticlePage = ({ data: { article } }) => {
-  const { title, copy } = article;
+  const { title, copy, relatedArticles } = article
 
   return (
     <Layout>
@@ -12,6 +12,14 @@ const ArticlePage = ({ data: { article } }) => {
 
       <h1>{title}</h1>
       <p>{copy}</p>
+
+      <ul>
+        {relatedArticles.map(article => (
+          <li>
+            <Link to={`article/${article.slug}`}>{article.title}</Link>
+          </li>
+        ))}
+      </ul>
     </Layout>
   )
 }
@@ -25,6 +33,11 @@ export const articleQuery = graphql`
       id
       title
       copy
+      relatedArticles {
+        id
+        slug
+        title
+      }
     }
   }
 `
