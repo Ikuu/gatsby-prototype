@@ -5,6 +5,7 @@ import SEO from "../components/seo"
 
 const ArticlePage = ({ data: { article } }) => {
   const { title, copy, relatedArticles } = article
+  const hasRelatedArticles = relatedArticles.length > 0
 
   return (
     <Layout>
@@ -13,14 +14,18 @@ const ArticlePage = ({ data: { article } }) => {
       <h1>{title}</h1>
       <p>{copy}</p>
 
-      {relatedArticles.length > 0 && <h2>Related Articles</h2>}
-      <ul>
-        {relatedArticles.map(article => (
-          <li>
-            <Link to={`article/${article.slug}`}>{article.title}</Link>
-          </li>
-        ))}
-      </ul>
+      {hasRelatedArticles && (
+        <>
+          <h2>Related Articles</h2>
+          <ul>
+            {relatedArticles.map(article => (
+              <li>
+                <Link to={`article/${article.slug}`}>{article.title}</Link>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </Layout>
   )
 }
